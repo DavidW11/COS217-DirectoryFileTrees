@@ -137,21 +137,24 @@ the error manifests itself or is "noticed" by the client.
 
       Executable         Function with the underlying error
 ===============================================================
-         ./bdtBad1        
+         ./bdtBad1            BDT_insert
 ---------------------------------------------------------------
-         ./bdtBad2        
+         ./bdtBad2            BDT_freeSubtree
+         --> BDT_rm
 ---------------------------------------------------------------
-         ./bdtBad3        
+         ./bdtBad3            BDT_addChild
+         --> BDT_insert --> newNode --> addChild
 ---------------------------------------------------------------
-         ./bdtBad4        
+         ./bdtBad4            BDT_strlenAccumulate
+         --> to_String --> DynArray_map
 ---------------------------------------------------------------
-         ./bdtBad5        
+         ./bdtBad5            BDT_findNode
+         --> BDT_contains
 ===============================================================
-
 ------------------------------------------------------------------------
 What are your critiques of the given DT implementations, as
 specified in Step 2.5?
 
-
+interfaces and dtGood.c and nodeDTGood.c 
 
 ------------------------------------------------------------------------
