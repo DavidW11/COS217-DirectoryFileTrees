@@ -12,8 +12,8 @@
 
 
 
-/* see checkerDT.h for specification */
-boolean CheckerDT_Node_isValid(Node_T oNNode) {
+/* see checkerFT.h for specification */
+boolean CheckerFT_Node_isValid(Node_T oNNode) {
    Node_T oNParent;
    Path_T oPNPath;
    Path_T oPPPath;
@@ -39,7 +39,7 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
         return FALSE;
    }
 
-   if (Node_getContents(oNNode) == NULL && Node_getLength != 0) {
+   if (Node_getContents(oNNode) == NULL && Node_getLength(oNNode) != 0) {
         fprintf(stderr, "Length is non-zero while there are no contents\n");
         return FALSE;
    }
@@ -73,14 +73,14 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
    parameter list to facilitate constructing your checks.
    If you do, you should update this function comment.
 */
-static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *node_count) {
+static boolean CheckerFT_treeCheck(Node_T oNNode, size_t *node_count) {
    size_t ulIndex;
 
    if(oNNode!= NULL) {
 
       /* Sample check on each node: node must be valid */
       /* If not, pass that failure back up immediately */
-      if(!CheckerDT_Node_isValid(oNNode))
+      if(!CheckerFT_Node_isValid(oNNode))
          return FALSE;
       *node_count += 1;
 
@@ -118,19 +118,19 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *node_count) {
 
          /* if recurring down one subtree results in a failed check
             farther down, passes the failure back up immediately */
-         if(!CheckerDT_treeCheck(oNChild, node_count))
+         if(!CheckerFT_treeCheck(oNChild, node_count))
             return FALSE;
       }
    }
    return TRUE;
 }
 
-/* see checkerDT.h for specification */
-boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
+/* see checkerFT.h for specification */
+boolean CheckerFT_isValid(boolean bIsInitialized, Node_T oNRoot,
                           size_t ulCount) {
 
    /* Sample check on a top-level data structure invariant:
-      if the DT is not initialized, its count should be 0. */
+      if the FT is not initialized, its count should be 0. */
    size_t node_count = 0;
    /* variable to store return value before checking invariant */
    boolean out;
@@ -143,7 +143,7 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
    }
    
    /* store return value */
-   out = CheckerDT_treeCheck(oNRoot, &node_count);
+   out = CheckerFT_treeCheck(oNRoot, &node_count);
    /* check that total node count is equal to ulCount */
    if (node_count != ulCount) {
       fprintf(stderr, "Number of nodes not equal to ulCount. \n");

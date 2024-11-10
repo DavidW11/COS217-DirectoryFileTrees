@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------*/
-/* nodeDT.c                                                           */
-/* Author: Christopher Moretti                                        */
+/* nodeFT.c                                                           */
+/* Authors: Will Grimes, David Wang                                    */
 /*--------------------------------------------------------------------*/
 
 #include <stdlib.h>
@@ -9,8 +9,9 @@
 #include "dynarray.h"
 #include "node.h"
 #include "a4def.h"
+#include "checkerFT.h"
 
-/* A node in a DT */
+/* A node in a FT */
 struct node {
    /* the object corresponding to the node's absolute path */
    Path_T oPPath;
@@ -116,7 +117,7 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult,
     int iStatus;
 
     assert(oPPath != NULL);
-    assert(oNParent == NULL || CheckerDT_Node_isValid(oNParent));
+    assert(oNParent == NULL || CheckerFT_Node_isValid(oNParent));
     assert(!oNParent->bIsFile);
 
     /* allocate space for a new node */
@@ -212,8 +213,8 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult,
 
     *poNResult = psNew;
 
-    assert(oNParent == NULL || CheckerDT_Node_isValid(oNParent));
-    assert(CheckerDT_Node_isValid(*poNResult));
+    assert(oNParent == NULL || CheckerFT_Node_isValid(oNParent));
+    assert(CheckerFT_Node_isValid(*poNResult));
 
     return SUCCESS;
 }
@@ -225,7 +226,7 @@ size_t Node_free(Node_T oNNode) {
     size_t ulCount = 0;
 
     assert(oNNode != NULL);
-    assert(CheckerDT_Node_isValid(oNNode));
+    assert(CheckerFT_Node_isValid(oNNode));
 
     /* remove from parent's list */
     if(oNNode->oNParent != NULL) {
