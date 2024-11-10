@@ -5,7 +5,7 @@
 # Author: Christopher Moretti
 #--------------------------------------------------------------------
 
-CC=gcc217m
+CC=gcc217
 
 all: sampleft
 
