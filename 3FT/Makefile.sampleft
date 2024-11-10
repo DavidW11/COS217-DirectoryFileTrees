@@ -14,7 +14,7 @@ clobber: clean
 	rm -f ft_client.o *~
 
 sampleft: sampleft.o ft_client.o
-	gcc217m sampleft.o ft_client.o -o sampleft
+	gcc217 sampleft.o ft_client.o -o sampleft
 
 ft_client.o: ft_client.c ft.h a4def.h
 	gcc217 -c ft_client.c
