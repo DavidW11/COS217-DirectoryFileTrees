@@ -5,8 +5,6 @@
 # Author: Christopher Moretti
 #--------------------------------------------------------------------
 
-CC=gcc217
-
 all: sampleft
 
 clean:
@@ -16,7 +14,7 @@ clobber: clean
 	rm -f ft_client.o *~
 
 sampleft: sampleft.o ft_client.o
-	$(CC) sampleft.o ft_client.o -o sampleft
+	gcc217m sampleft.o ft_client.o -o sampleft
 
 ft_client.o: ft_client.c ft.h a4def.h
-	$(CC) -c ft_client.c
+	gcc217 -c ft_client.c

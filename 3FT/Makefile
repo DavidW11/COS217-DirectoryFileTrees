@@ -3,8 +3,8 @@
 # Authors: Will Grimes, David Wang
 #--------------------------------------------------------------------
 
-# GCC = gcc217
-GCC = gcc217m
+# GCC = gcc217m
+GCC = gcc217
 
 TARGETS = ft
 
