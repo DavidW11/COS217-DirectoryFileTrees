@@ -281,7 +281,7 @@ boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
 size_t Node_getNumChildren(Node_T oNParent) {
     /* added assert that oNParent != file */
     assert(oNParent != NULL);
-    assert(!oNParent->bIsFile);
+    if (oNParent->bIsFile) return 0;
 
     return DynArray_getLength(oNParent->oDChildren);
 }
