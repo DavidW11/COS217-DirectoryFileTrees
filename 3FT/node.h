@@ -14,7 +14,7 @@
 /* A Node_T is a node in a Directory Tree */
 typedef struct node *Node_T;
 
-/* Returns 1 if oNNode represents a file and 0 otherwise */
+/* Returns TRUE if oNNode represents a file and FALSE otherwise */
 boolean Node_isFile(Node_T oNNode);
 
 /* Returns the contents of oNNode or NULL if it has none. */
@@ -22,6 +22,10 @@ void *Node_getContents(Node_T oNNode);
 
 /* return the length of the node's contents */
 size_t Node_getLength(Node_T oNNode);
+
+/* returns TRUE if node's children DynArray_T is NULL 
+and FALSE otherwise */
+boolean Node_childrenIsNull(Node_T oNNode);
 
 /* Replaces oNNode's contents with pvNewContents and  and returns the
   old contents. */

@@ -157,4 +157,15 @@ specified in Step 2.5?
 
 interfaces and dtGood.c and nodeDTGood.c 
 
+consistency of parameter orders in nodeDTGood (new)
+Node_new --> path, parent, result
+Node_hasChild --> parent, path, child
+
+BAD NAMING OF ENUMS --> CONFLICTING, BAD, NO SUCH PATH ... 
+
+
+
+* calls dyn array method in get num children
+* 
+
 ------------------------------------------------------------------------

@@ -12,7 +12,7 @@
 #include "dynarray.h"
 #include "path.h"
 #include "node.h"
-#include "checker.h"
+#include "checkerFT.h"
 #include "ft.h"
 
 

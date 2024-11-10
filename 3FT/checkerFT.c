@@ -1,12 +1,12 @@
 /*--------------------------------------------------------------------*/
-/* checkerDT.c                                                        */
-/* Author:                                                            */
+/* checkerFT.c                                                        */
+/* Authors: David Wang, Will Grimes                                   */
 /*--------------------------------------------------------------------*/
 
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-#include "checkerDT.h"
+#include "checkerFT.h"
 #include "dynarray.h"
 #include "path.h"
 
@@ -23,6 +23,28 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
       fprintf(stderr, "A node is a NULL pointer\n");
       return FALSE;
    }
+
+   if (Node_isFile(oNNode) && Node_childrenIsNull(oNNode)) {
+        fprintf(stderr, "Child array for file node is not NULL\n");
+        return FALSE;
+   }
+
+   if ((!Node_isFile(oNNode)) && Node_getContents(oNNode) != NULL) {
+        fprintf(stderr, "Directory node has contents\n");
+        return FALSE;
+   }
+
+   if ((!Node_isFile(oNNode)) && Node_getLength(oNNode) != 0) {
+        fprintf(stderr, "Directory node has non-zero length\n");
+        return FALSE;
+   }
+
+   if (Node_getContents(oNNode) == NULL && Node_getLength != 0) {
+        fprintf(stderr, "Length is non-zero while there are no contents\n");
+        return FALSE;
+   }
+
+
 
    /* Sample check: parent's path must be the longest possible
       proper prefix of the node's path */
