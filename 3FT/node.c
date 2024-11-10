@@ -118,7 +118,7 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult,
 
     assert(oPPath != NULL);
     assert(oNParent == NULL || CheckerFT_Node_isValid(oNParent));
-    assert(oNParent != NULL && !oNParent->bIsFile);
+    if (oNParent != NULL) assert(!oNParent->bIsFile);
 
     /* allocate space for a new node */
     psNew = malloc(sizeof(struct node));
