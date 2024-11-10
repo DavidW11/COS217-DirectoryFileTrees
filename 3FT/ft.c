@@ -464,6 +464,7 @@ boolean FT_containsFile(const char *pcPath)
     assert(pcPath != NULL);
 
     iStatus = FT_findNode(pcPath, &oNFound);
+    
     return (boolean) (iStatus == NOT_A_DIRECTORY);
 }
 
@@ -516,7 +517,6 @@ void *FT_getFileContents(const char *pcPath)
     iStatus = FT_findNode(pcPath, &oNFound);
     if (iStatus != NOT_A_DIRECTORY) return NULL;
 
-    assert(CheckerFT_isValid(bIsInitialized, oNRoot, ulCount));
     return Node_getContents(oNFound);
 }
 
@@ -534,6 +534,7 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
     void *pvOldContents;
 
     assert(pcPath != NULL);
+    assert(CheckerFT_isValid(bIsInitialized, oNRoot, ulCount));
 
     iStatus = FT_findNode(pcPath, &oNFound);
     if (iStatus != NOT_A_DIRECTORY) return NULL;

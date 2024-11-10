@@ -49,13 +49,13 @@ void *Node_editContents(Node_T oNNode, void *pvNewContents,
 
     assert(oNNode != NULL);
     assert(Node_isFile(oNNode));
-    assert(CheckerFT_node_isValid(oNNode));
+    assert(CheckerFT_Node_isValid(oNNode));
 
     pvOldContents = oNNode->pvContents;
     oNNode->pvContents = pvNewContents;
     oNNode->ulLength = ulNewLength;
     
-    assert(CheckerFT_node_isValid(oNNode));
+    assert(CheckerFT_Node_isValid(oNNode));
     return pvOldContents;
 }
 /*
