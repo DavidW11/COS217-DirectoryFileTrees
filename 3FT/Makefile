@@ -16,7 +16,7 @@ clean:
 	rm -f $(TARGETS) meminfo*.out
 
 clobber: clean
-	rm -f dynarray.o path.o ft_client.o checkerFT.o node.o ftGood.o *~
+	rm -f dynarray.o path.o ft_client.o checkerFT.o node.o ftGood.o ft.o *~
 
 ft: dynarray.o path.o checkerFT.o node.o ft.o ft_client.o
 	$(GCC) -g $^ -o $@
