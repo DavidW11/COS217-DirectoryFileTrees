@@ -325,7 +325,7 @@ int FT_rmDir(const char *pcPath)
       if (iStatus == IS_FILE) return NOT_A_DIRECTORY;
       return iStatus;
     }
-        
+    
 
     ulCount -= Node_free(oNFound);
     if(ulCount == 0)
@@ -660,6 +660,16 @@ static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
    if(n != NULL) {
       (void) DynArray_set(d, i, n);
       i++;
+
+      for(c = 0; c < Node_getNumChildren(n); c++) {
+         int iStatus;
+         Node_T oNChild = NULL;
+         iStatus = Node_getChild(n,c, &oNChild);
+         assert(iStatus == SUCCESS);
+         if (Node_isFile(oNChild)) DynArray_set(d, i++, oNChild);
+         // i = FT_preOrderTraversal(oNChild, d, i);
+      }
+
       for(c = 0; c < Node_getNumChildren(n); c++) {
          int iStatus;
          Node_T oNChild = NULL;
@@ -712,7 +722,6 @@ static void FT_strcatAccumulate(Node_T oNNode, char *pcAcc) {
 */
 char *FT_toString(void) 
 {
-    int i;
     DynArray_T nodes;
     size_t totalStrlen = 1;
     char *result = NULL;

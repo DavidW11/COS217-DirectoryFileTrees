@@ -253,7 +253,6 @@ size_t Node_free(Node_T oNNode) {
     /* finally, free the struct node */
     free(oNNode);
     ulCount++;
-    assert(CheckerFT_Node_isValid(oNNode));
     return ulCount;
 }
 
