@@ -343,7 +343,11 @@ int FT_insertFile(const char *pcPath, void *pvContents,
     }
 
     /* validate that not adding file as root */
-    if(!oNRoot && Path_getDepth(oPPath)==1) return CONFLICTING_PATH;
+    if(!oNRoot && Path_getDepth(oPPath)==1) {
+        Path_free(oPPath);
+        return CONFLICTING_PATH;
+    }
+    
 
     /* no ancestor node found, so if root is not NULL,
         pcPath isn't underneath root. */
