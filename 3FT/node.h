@@ -25,7 +25,7 @@ size_t Node_getLength(Node_T oNNode);
 
 /* returns TRUE if oNNode's children DynArray_T is NULL 
 and FALSE otherwise */
-/* boolean Node_childrenIsNull(Node_T oNNode); */
+boolean Node_childrenIsNull(Node_T oNNode);
 
 /* Replaces oNNode's contents with pvNewContents and  and returns the
   old contents. */

@@ -39,9 +39,9 @@ size_t Node_getLength(Node_T oNNode) {
     return oNNode->ulLength;
 }
 
-/* boolean Node_childrenIsNull(Node_T oNNode) {
+boolean Node_childrenIsNull(Node_T oNNode) {
     return (boolean) (oNNode->oDChildren == NULL);
-} */
+}
 
 void *Node_editContents(Node_T oNNode, void *pvNewContents, 
         size_t ulNewLength) {
