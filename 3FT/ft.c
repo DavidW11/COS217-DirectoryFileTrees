@@ -361,9 +361,6 @@ int FT_insertFile(const char *pcPath, void *pvContents,
     assert(pcPath != NULL);
     assert(CheckerFT_isValid(bIsInitialized, oNRoot, ulCount));
 
-    /* validate that not adding file as root */
-    if(!oNRoot) return CONFLICTING_PATH;
-
     /* validate pcPath and generate a Path_T for it */
     if(!bIsInitialized)
         return INITIALIZATION_ERROR;
@@ -379,6 +376,9 @@ int FT_insertFile(const char *pcPath, void *pvContents,
         Path_free(oPPath);
         return iStatus;
     }
+
+    /* validate that not adding file as root */
+    if(!oNRoot && Path_getDepth(oPPath)==1) return CONFLICTING_PATH;
 
     /* no ancestor node found, so if root is not NULL,
         pcPath isn't underneath root. */
