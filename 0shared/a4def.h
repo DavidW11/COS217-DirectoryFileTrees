@@ -12,7 +12,7 @@ enum { SUCCESS,
        ALREADY_IN_TREE,
        NO_SUCH_PATH, CONFLICTING_PATH, BAD_PATH,
        NOT_A_DIRECTORY, NOT_A_FILE,
-       MEMORY_ERROR
+       MEMORY_ERROR, IS_FILE, IS_DIRECTORY
 };
 
 /* In lieu of a proper boolean datatype */
