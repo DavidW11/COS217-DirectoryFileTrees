@@ -24,10 +24,10 @@ boolean CheckerFT_Node_isValid(Node_T oNNode) {
       return FALSE;
    }
 
-   /*if (Node_isFile(oNNode) && Node_childrenIsNull(oNNode)) {
+   if (Node_isFile(oNNode) && !Node_childrenIsNull(oNNode)) {
         fprintf(stderr, "Child array for file node is not NULL\n");
         return FALSE;
-   }*/
+   }
 
    if ((!Node_isFile(oNNode)) && Node_getContents(oNNode) != NULL) {
         fprintf(stderr, "Directory node has contents\n");
@@ -35,7 +35,7 @@ boolean CheckerFT_Node_isValid(Node_T oNNode) {
    }
 
    if ((!Node_isFile(oNNode)) && Node_getLength(oNNode) != 0) {
-        fprintf(stderr, "Directory node has non-zero length\n");
+        fprintf(stderr, "Directory node has non-zero content length\n");
         return FALSE;
    }
 
