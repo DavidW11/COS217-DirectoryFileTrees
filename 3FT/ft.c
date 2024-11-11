@@ -329,8 +329,10 @@ int FT_insertFile(const char *pcPath, void *pvContents,
         return INITIALIZATION_ERROR;
 
     iStatus = Path_new(pcPath, &oPPath);
-    if(iStatus != SUCCESS)
+    if(iStatus != SUCCESS) {
+        Path_free(oPPath);
         return iStatus;
+    }
 
     /* find the closest ancestor of oPPath already in the tree */
     iStatus= FT_traversePath(oPPath, &oNCurr);
