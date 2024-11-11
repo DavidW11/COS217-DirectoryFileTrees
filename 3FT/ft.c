@@ -653,32 +653,32 @@ int FT_destroy(void)
   Returns the next unused index in d after the insertion(s).
 */
 static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
-   size_t c;
+    size_t c;
 
-   assert(d != NULL);
+    assert(d != NULL);
 
-   if(n != NULL) {
-      (void) DynArray_set(d, i, n);
-      i++;
+    if(n != NULL) {
+        (void) DynArray_set(d, i, n);
+        i++;
+        
+        /* add all files in level */
+        for(c = 0; c < Node_getNumChildren(n); c++) {
+            int iStatus;
+            Node_T oNChild = NULL;
+            iStatus = Node_getChild(n,c, &oNChild);
+            assert(iStatus == SUCCESS);
+            if (Node_isFile(oNChild)) DynArray_set(d, i++, oNChild);
+        }
 
-      for(c = 0; c < Node_getNumChildren(n); c++) {
-         int iStatus;
-         Node_T oNChild = NULL;
-         iStatus = Node_getChild(n,c, &oNChild);
-         assert(iStatus == SUCCESS);
-         if (Node_isFile(oNChild)) DynArray_set(d, i++, oNChild);
-         // i = FT_preOrderTraversal(oNChild, d, i);
-      }
-
-      for(c = 0; c < Node_getNumChildren(n); c++) {
-         int iStatus;
-         Node_T oNChild = NULL;
-         iStatus = Node_getChild(n,c, &oNChild);
-         assert(iStatus == SUCCESS);
-         i = FT_preOrderTraversal(oNChild, d, i);
-      }
-   }
-   return i;
+        for(c = 0; c < Node_getNumChildren(n); c++) {
+            int iStatus;
+            Node_T oNChild = NULL;
+            iStatus = Node_getChild(n,c, &oNChild);
+            assert(iStatus == SUCCESS);
+            i = FT_preOrderTraversal(oNChild, d, i);
+        }
+    }
+    return i;
 }
 
 /*
