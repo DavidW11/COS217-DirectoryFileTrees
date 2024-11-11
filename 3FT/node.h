@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------------*/
-/* node.h                                                           */
+/* node.h                                                             */
 /* Authors: Will Grimes, David Wang                                   */
 /*--------------------------------------------------------------------*/
 
@@ -11,21 +11,21 @@
 #include "path.h"
 
 
-/* A Node_T is a node in a Directory Tree */
+/* A Node_T is a node in a File Tree */
 typedef struct node *Node_T;
 
-/* Returns TRUE if oNNode represents a file and FALSE otherwise */
+/* Returns TRUE if oNNode is a file and FALSE if it is a directory */
 boolean Node_isFile(Node_T oNNode);
 
 /* Returns the contents of oNNode or NULL if it has none. */
 void *Node_getContents(Node_T oNNode);
 
-/* return the length of the node's contents */
+/* Returns the length of oNNode's contents or 0 if it has none. */
 size_t Node_getLength(Node_T oNNode);
 
-/* returns TRUE if node's children DynArray_T is NULL 
+/* returns TRUE if oNNode's children DynArray_T is NULL 
 and FALSE otherwise */
-boolean Node_childrenIsNull(Node_T oNNode);
+/* boolean Node_childrenIsNull(Node_T oNNode); */
 
 /* Replaces oNNode's contents with pvNewContents and  and returns the
   old contents. */
