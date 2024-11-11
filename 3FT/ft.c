@@ -322,6 +322,7 @@ int FT_rmDir(const char *pcPath)
     iStatus = FT_findNode(pcPath, &oNFound);
 
     if(iStatus != IS_DIRECTORY)
+        if (iStatus == IS_FILE) return NOT_A_DIRECTORY;
         return iStatus;
 
     ulCount -= Node_free(oNFound);
@@ -493,6 +494,7 @@ int FT_rmFile(const char *pcPath)
     iStatus = FT_findNode(pcPath, &oNFound);
 
     if(iStatus != IS_FILE)
+        if (iStatus == IS_DIRECTORY) return NOT_A_FILE;
         return iStatus;
 
     ulCount -= Node_free(oNFound);
@@ -707,7 +709,7 @@ static void FT_strcatAccumulate(Node_T oNNode, char *pcAcc) {
 */
 char *FT_toString(void) 
 {
-    
+    int i;
     DynArray_T nodes;
     size_t totalStrlen = 1;
     char *result = NULL;
