@@ -125,6 +125,7 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
    
    /* store return value */
    out = CheckerDT_treeCheck(oNRoot, &node_count);
+   if (out==FALSE) return out;
    /* check that total node count is equal to ulCount */
    if (node_count != ulCount) {
       fprintf(stderr, "Number of nodes not equal to ulCount. \n");
