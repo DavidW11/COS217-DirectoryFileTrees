@@ -57,53 +57,51 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *node_count) {
 
    assert(node_count!=NULL);
 
-   if(oNNode!= NULL) {
+   if(oNNode== NULL) return TRUE;
 
-      /* Sample check on each node: node must be valid */
-      /* If not, pass that failure back up immediately */
-      if(!CheckerDT_Node_isValid(oNNode))
+   /* Sample check on each node: node must be valid */
+   /* If not, pass that failure back up immediately */
+   if(!CheckerDT_Node_isValid(oNNode))
+      return FALSE;
+   *node_count += 1;
+
+   /* Recur on every child of oNNode */
+   for(ulIndex = 0; ulIndex < Node_getNumChildren(oNNode); ulIndex++)
+   {
+      Node_T oNChild = NULL;
+      Node_T oNChild2 = NULL;
+
+      int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
+
+      if(iStatus != SUCCESS) {
+         fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
          return FALSE;
-      *node_count += 1;
-
-      /* Recur on every child of oNNode */
-      for(ulIndex = 0; ulIndex < Node_getNumChildren(oNNode); ulIndex++)
-      {
-         Node_T oNChild = NULL;
-         Node_T oNChild2 = NULL;
-
-         int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
-
-         if(iStatus != SUCCESS) {
-            fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
-            return FALSE;
-         }
-
-         /* Checks that 1) nodes are in lexicographic order 
-         and 2) there are no duplicate nodes. */
-         if (ulIndex + 1 < Node_getNumChildren(oNNode)){
-            Path_T path1 = Node_getPath(oNChild);
-            Path_T path2;
-            
-            iStatus = Node_getChild(oNNode, ulIndex + 1, &oNChild2);
-            path2 = Node_getPath(oNChild2);
-
-            if (Path_comparePath(path1, path2) > 0) {
-               fprintf(stderr, "Nodes are not in lexicographic order\n");
-               return FALSE;
-            }
-            if (Path_comparePath(path1, path2) == 0) {
-               fprintf(stderr, "Nodes are identical\n");
-               return FALSE;
-            }
-         }
-
-         /* if recurring down one subtree results in a failed check
-            farther down, passes the failure back up immediately */
-         if(!CheckerDT_treeCheck(oNChild, node_count))
-            return FALSE;
       }
+
+      /* Checks that 1) nodes are in lexicographic order 
+      and 2) there are no duplicate nodes. */
+      if (ulIndex + 1 < Node_getNumChildren(oNNode)){
+         Path_T path1 = Node_getPath(oNChild);
+         Path_T path2;
+         
+         iStatus = Node_getChild(oNNode, ulIndex + 1, &oNChild2);
+         path2 = Node_getPath(oNChild2);
+
+         if (Path_comparePath(path1, path2) > 0) {
+            fprintf(stderr, "Nodes are not in lexicographic order\n");
+            return FALSE;
+         }
+         if (Path_comparePath(path1, path2) == 0) {
+            fprintf(stderr, "Nodes are identical\n");
+            return FALSE;
+         }
+      }
+
+      /* if recurring down one subtree results in a failed check
+         farther down, passes the failure back up immediately */
+      if(!CheckerDT_treeCheck(oNChild, node_count))
+         return FALSE;
    }
-   return TRUE;
 }
 
 /* see checkerDT.h for specification */
