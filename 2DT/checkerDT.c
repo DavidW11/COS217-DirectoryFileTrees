@@ -102,6 +102,8 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *node_count) {
       if(!CheckerDT_treeCheck(oNChild, node_count))
          return FALSE;
    }
+
+   return TRUE;
 }
 
 /* see checkerDT.h for specification */
