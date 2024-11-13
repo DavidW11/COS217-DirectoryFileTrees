@@ -10,37 +10,36 @@
 #include "dynarray.h"
 #include "path.h"
 
-
-
 /* see checkerFT.h for specification */
 boolean CheckerFT_Node_isValid(Node_T oNNode) {
-   Node_T oNParent;
-   Path_T oPNPath;
-   Path_T oPPPath;
+    Node_T oNParent;
+    Path_T oPNPath;
+    Path_T oPPPath;
 
-   /* Sample check: a NULL pointer is not a valid node */
-   if(oNNode == NULL) {
-      fprintf(stderr, "A node is a NULL pointer\n");
-      return FALSE;
-   }
+    /* Sample check: a NULL pointer is not a valid node */
+    if(oNNode == NULL) {
+        fprintf(stderr, "A node is a NULL pointer\n");
+        return FALSE;
+    }
 
-   if (Node_isFile(oNNode) && !Node_childrenIsNull(oNNode)) {
+    if (Node_isFile(oNNode) && !Node_childrenIsNull(oNNode)) {
         fprintf(stderr, "Child array for file node is not NULL\n");
         return FALSE;
-   }
+    }
 
-   if ((!Node_isFile(oNNode)) && Node_getContents(oNNode) != NULL) {
+    if ((!Node_isFile(oNNode)) && Node_getContents(oNNode) != NULL) {
         fprintf(stderr, "Directory node has contents\n");
         return FALSE;
-   }
+    }
 
-   if ((!Node_isFile(oNNode)) && Node_getLength(oNNode) != 0) {
+    if ((!Node_isFile(oNNode)) && Node_getLength(oNNode) != 0) {
         fprintf(stderr, "Directory node has non-zero content length\n");
         return FALSE;
-   }
+    }
 
-   if (Node_getContents(oNNode) == NULL && Node_getLength(oNNode) != 0) {
-        fprintf(stderr, "Length is non-zero while there are no contents\n");
+    if (Node_getContents(oNNode) == NULL && Node_getLength(oNNode) != 0) {
+        fprintf(stderr, 
+            "Length is non-zero while there are no contents\n");
         return FALSE;
    }
 
@@ -107,7 +106,8 @@ static boolean CheckerFT_treeCheck(Node_T oNNode, size_t *node_count) {
             path2 = Node_getPath(oNChild2);
 
             if (Path_comparePath(path1, path2) > 0) {
-               fprintf(stderr, "Nodes are not in lexicographic order\n");
+               fprintf(stderr, 
+                  "Nodes are not in lexicographic order\n");
                return FALSE;
             }
             if (Path_comparePath(path1, path2) == 0) {

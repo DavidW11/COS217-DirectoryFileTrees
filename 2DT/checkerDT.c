@@ -43,7 +43,8 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
 }
 
 /*
-   Performs a pre-order traversal of the tree rooted at oNNode.
+   Performs a pre-order traversal of the tree rooted at oNNode, while
+   incrementing the value pointed to by node_count at each valid node.
    Returns FALSE if a broken invariant is found and
    returns TRUE otherwise.
 
@@ -53,6 +54,8 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
 */
 static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *node_count) {
    size_t ulIndex;
+
+   assert(node_count!=NULL);
 
    if(oNNode!= NULL) {
 
