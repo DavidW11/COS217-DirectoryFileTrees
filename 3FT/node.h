@@ -11,7 +11,7 @@
 #include "path.h"
 
 
-/* A Node_T is a node in a File Tree */
+/* A Node_T is a node in a File Tree. */
 typedef struct node *Node_T;
 
 /* Returns TRUE if oNNode is a file and FALSE if it is a directory */
@@ -33,10 +33,13 @@ void *Node_editContents(Node_T oNNode, void *pvNewContents,
   size_t ulNewLength);
 
 /*
-  Creates a new node in the Directory Tree, with path oPPath and
-  parent oNParent. Returns an int SUCCESS status and sets *poNResult
-  to be the new node if successful. Otherwise, sets *poNResult to NULL
-  and returns status:
+  Creates a new node in the Directory Tree, with path oPPath,
+  parent oNParent, file boolean bIsFile, contents pvContents, and
+  size of contents ulLength. Sets oDChildren to NULL if bIsFile,
+  and sets pvContents/ulLength fields to NULL if !bIsFile.
+  Returns an int SUCCESS status and sets *poNResult to be the new 
+  node if successful. Otherwise, sets *poNResult to NULL and returns 
+  status:
   * MEMORY_ERROR if memory could not be allocated to complete request
   * CONFLICTING_PATH if oNParent's path is not an ancestor of oPPath
   * NO_SUCH_PATH if oPPath is of depth 0
@@ -49,7 +52,7 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult,
 
 /*
   Destroys and frees all memory allocated for the subtree rooted at
-  oNNode, i.e., deletes this node and all its descendents. Returns the
+  oNNode, i.e., deletes oNNode and all its descendents. Returns the
   number of nodes deleted.
 */
 size_t Node_free(Node_T oNNode);
@@ -64,7 +67,7 @@ Path_T Node_getPath(Node_T oNNode);
   If oNParent has such a child, stores in *pulChildID the child's
   identifier (as used in Node_getChild). If oNParent does not have
   such a child, stores in *pulChildID the identifier that such a
-  child _would_ have if inserted.
+  child would have if inserted.
 */
 boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
                          size_t *pulChildID);

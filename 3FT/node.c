@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------*/
-/* nodeFT.c                                                           */
-/* Authors: Will Grimes, David Wang                                    */
+/* node.c                                                             */
+/* Authors: Will Grimes, David Wang                                   */
 /*--------------------------------------------------------------------*/
 
 #include <stdlib.h>
@@ -66,7 +66,6 @@ void *Node_editContents(Node_T oNNode, void *pvNewContents,
 static int Node_addChild(Node_T oNParent, Node_T oNChild,
                          size_t ulIndex) {
    assert(oNParent != NULL);
-   /* assert that parent is not a file */
    assert(!oNParent->bIsFile);
    assert(oNChild != NULL);
 
@@ -90,25 +89,8 @@ static int Node_compareString(const Node_T oNFirst,
    return Path_compareString(oNFirst->oPPath, pcSecond);
 }
 
-
-/*
-  Creates a new node with path oPPath and parent oNParent.  Returns an
-  int SUCCESS status and sets *poNResult to be the new node if
-  successful. Otherwise, sets *poNResult to NULL and returns status:
-  * MEMORY_ERROR if memory could not be allocated to complete request
-  * CONFLICTING_PATH if oNParent's path is not an ancestor of oPPath
-  * NO_SUCH_PATH if oPPath is of depth 0
-                 or oNParent's path is not oPPath's direct parent
-                 or oNParent is NULL but oPPath is not of depth 1
-  * ALREADY_IN_TREE if oNParent already has a child with this path
-*/
 int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, 
     boolean bIsFile, void *pvContents, size_t ulLength) {
-    /* 
-    assert that parent is not a file
-    initialize bIsFile field, and set oDChildren to NULL if bIsFile
-    initialize pvContents/ulLength fields, and set to NULL if directory
-    */
     struct node *psNew;
     Path_T oPParentPath = NULL;
     Path_T oPNewPath = NULL;
@@ -220,8 +202,6 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult,
 }
 
 size_t Node_free(Node_T oNNode) {
-    /* added a check of file v. directory before iterating 
-    thru child array */
     size_t ulIndex;
     size_t ulCount = 0;
 
@@ -257,7 +237,6 @@ size_t Node_free(Node_T oNNode) {
 }
 
 Path_T Node_getPath(Node_T oNNode) {
-    /* no changes. */
     assert(oNNode != NULL);
 
     return oNNode->oPPath;
@@ -265,7 +244,6 @@ Path_T Node_getPath(Node_T oNNode) {
 
 boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
                          size_t *pulChildID) {
-    /* added assert that oNParent != file */
     assert(oNParent != NULL);
     assert(oPPath != NULL);
     assert(pulChildID != NULL);
@@ -278,7 +256,6 @@ boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
 }
 
 size_t Node_getNumChildren(Node_T oNParent) {
-    /* added assert that oNParent != file */
     assert(oNParent != NULL);
     if (oNParent->bIsFile) return 0;
 
@@ -287,7 +264,6 @@ size_t Node_getNumChildren(Node_T oNParent) {
 
 int  Node_getChild(Node_T oNParent, size_t ulChildID,
                    Node_T *poNResult) {
-    /* added assert that oNParent != file */
     assert(oNParent != NULL);
     assert(poNResult != NULL);
     assert(!oNParent->bIsFile);
@@ -304,14 +280,12 @@ int  Node_getChild(Node_T oNParent, size_t ulChildID,
 }
 
 Node_T Node_getParent(Node_T oNNode) {
-    /* no changes. */
     assert(oNNode != NULL);
 
     return oNNode->oNParent;
 }
 
 int Node_compare(Node_T oNFirst, Node_T oNSecond) {
-   /* no changes. */
    assert(oNFirst != NULL);
    assert(oNSecond != NULL);
 
@@ -319,7 +293,6 @@ int Node_compare(Node_T oNFirst, Node_T oNSecond) {
 }
 
 char *Node_toString(Node_T oNNode) {
-   /* no changes. */
    char *copyPath;
 
    assert(oNNode != NULL);
