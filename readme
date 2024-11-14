@@ -1,10 +1,5 @@
 Assignment 4 readme File
 
-Todo:
-Critter and Split for all files
-comments for part 3
-2.5 / readme
-
 ------------------------------------------------------------------------
 Student 1: What is your name?
 
@@ -13,7 +8,7 @@ David Wang
 ------------------------------------------------------------------------
 Student 2: What is your name?
 
-Will Grimes
+William Grimes
 
 ------------------------------------------------------------------------
 Student 1: What authorized sources of information did you use to
@@ -22,7 +17,25 @@ information given in the "Policies" web page (also available on armlab
 in the file ~cos217/AuthorizedSourcesList ) to this section of the
 readme file, and edit it as appropriate.
 
+The course's lectures.
 
+The course's precepts.
+
+The course's website.
+
+Documents that are referenced directly by the course's website. 
+Such documents include the course's lecture slides and precept handouts.
+
+The course's textbooks and reference manuals.
+
+The man pages on the armlab cluster.
+
+The course's current staff members outside of class time through 
+office hours. - Donna
+
+The course's current staff members outside of class time through Ed.
+
+Current Intro Lab TAs through visits to the Intro COS Lab. - Jorrel
 
 ------------------------------------------------------------------------
 Student 2: What authorized sources of information did you use to
@@ -31,7 +44,25 @@ information given in the "Policies" web page (also available on armlab
 in the file ~cos217/AuthorizedSourcesList ) to this section of the
 readme file, and edit it as appropriate.
 
+The course's lectures.
 
+The course's precepts.
+
+The course's website.
+
+Documents that are referenced directly by the course's website. 
+Such documents include the course's lecture slides and precept handouts.
+
+The course's textbooks and reference manuals.
+
+The man pages on the armlab cluster.
+
+The course's current staff members outside of class time through 
+office hours. - Donna
+
+The course's current staff members outside of class time through Ed.
+
+Current Intro Lab TAs through visits to the Intro COS Lab. - Jorrel
 
 ------------------------------------------------------------------------
 Student 1: What unauthorized sources of information did you use to
@@ -45,7 +76,7 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 Student 2: What unauthorized sources of information did you use to
@@ -59,7 +90,7 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 Student 1: In fulfillment of the requirement from section 2.4.3 of the
@@ -69,7 +100,7 @@ guide, enter your name in the space below the following affirmation:
 This paper represents my own work in accordance with University
 regulations.
 
-
+David Wang
 
 ------------------------------------------------------------------------
 Student 2: In fulfillment of the requirement from section 2.4.3 of the
@@ -79,19 +110,22 @@ guide, enter your name in the space below the following affirmation:
 This paper represents my own work in accordance with University
 regulations.
 
-
+William Grimes
 
 ------------------------------------------------------------------------
 Student 1: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+This assignment helped me gain familiarity in both emacs and gdb.
+I got better at reading code that was written by other people, as well
+as understanding the invariants of an abstract object. 
 
 ------------------------------------------------------------------------
 Student 2: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+I enjoyed it! Debugging didn't take as long as I would have thought
+for part 3, but part 1 took a while.
 
 ------------------------------------------------------------------------
 (optional) What information can you provide about your submission that
@@ -206,17 +240,18 @@ the error manifests itself or is "noticed" by the client.
 What are your critiques of the given DT implementations, as
 specified in Step 2.5?
 
-interfaces and dtGood.c and nodeDTGood.c 
+Consistency of parameter orders in nodeDT.h:
+We can improve the consistency of the parameter ordering in nodeDT.
+For example, Node_new orders its parameters by path, parent, result.
+Whereas Node_hasChild orders its parametesr by parent, path, child.
+The inverted order of parent and path can make calling these function
+unnecessarily confusing.
 
-consistency of parameter orders in nodeDTGood (new)
-Node_new --> path, parent, result
-Node_hasChild --> parent, path, child
-
-BAD NAMING OF ENUMS --> CONFLICTING, BAD, NO SUCH PATH ... 
-
-
-
-* calls dyn array method in get num children
-* 
+Improve naming of ENUMS:
+We think that the return status ENUMS can be interpreted vaguely.
+For example, it is not immediately recognizable what the difference
+is between a BAD, CONFLICTING, or NO_SUCH path. It could be helpful to 
+make these enum names more specific (which is also something we could
+have improved on in part 3).
 
 ------------------------------------------------------------------------
