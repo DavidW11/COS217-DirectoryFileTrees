@@ -102,18 +102,18 @@ static boolean CheckerFT_treeCheck(Node_T oNNode, size_t *node_count) {
       /* Checks that 1) nodes are in lexicographic order 
       and 2) there are no duplicate nodes. */
       if (ulIndex + 1 < Node_getNumChildren(oNNode)){
-         Path_T path1 = Node_getPath(oNChild);
-         Path_T path2;
-         
          iStatus = Node_getChild(oNNode, ulIndex + 1, &oNChild2);
-         path2 = Node_getPath(oNChild2);
+         if(iStatus != SUCCESS) {
+            fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
+            return FALSE;
+         }
 
-         if (Path_comparePath(path1, path2) > 0) {
+         if (Node_compare(oNChild, oNChild2) > 0) {
             fprintf(stderr, 
                "Nodes are not in lexicographic order\n");
             return FALSE;
          }
-         if (Path_comparePath(path1, path2) == 0) {
+         if (Node_compare(oNChild, oNChild2) == 0) {
             fprintf(stderr, "Nodes are identical\n");
             return FALSE;
          }
