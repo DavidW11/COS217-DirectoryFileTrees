@@ -122,8 +122,22 @@ your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
+ft.c: (in function FT_traversePath)
+ft.c:90:45: Variable ulChildID used before definition
+      An rvalue is used that may not be initialized to a value on some execution
+      path. (Use -usedef to inhibit warning)
+node.c: (in function Node_new)
+node.c:187:50: Variable ulIndex used before definition
+node.c: (in function Node_free)
+node.c:219:37: Variable ulIndex used before definition
+path.h:94:13: Function exported but not used outside path: Path_getComponent
+      A declaration is exported, but not used outside this module. Declaration can
+      use static qualifier. (Use -exportlocal to inhibit warning)
+      path.c:316:1: Definition of Path_getComponent
 
-
+All of these splint warnings result directly from repurposing the DT 
+code that was provided to us, as they also appear when splinting the 
+files from part 2. 
 ------------------------------------------------------------------------
 What warnings does critTer generate on your Part 3 code, and what are
 your disagreements with them? Copy the critTer warnings here, and
@@ -159,6 +173,10 @@ ft.c:
       ft.c: line 649: low priority: 
       A source code file should contain fewer than 500 lines;
       this file contains 650 lines
+
+We do not validate that pvContents or pvNewContents is not NULL because
+we allow files to have NULL contents and one of our invariants is that
+directories have NULL contents. 
 
 ------------------------------------------------------------------------
 For each of the five faulty BDT implementations required by Step
