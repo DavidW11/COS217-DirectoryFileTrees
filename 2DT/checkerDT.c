@@ -87,11 +87,12 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *node_count) {
          iStatus = Node_getChild(oNNode, ulIndex + 1, &oNChild2);
          path2 = Node_getPath(oNChild2);
 
-         if (Path_comparePath(path1, path2) > 0) {
-            fprintf(stderr, "Nodes are not in lexicographic order\n");
+         if (Node_compare(oNChild, oNChild2) > 0) {
+            fprintf(stderr, 
+               "Nodes are not in lexicographic order\n");
             return FALSE;
          }
-         if (Path_comparePath(path1, path2) == 0) {
+         if (Node_compare(oNChild, oNChild2) == 0) {
             fprintf(stderr, "Nodes are identical\n");
             return FALSE;
          }

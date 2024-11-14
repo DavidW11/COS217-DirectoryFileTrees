@@ -130,7 +130,35 @@ your disagreements with them? Copy the critTer warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
+node.c:
+      node.c: line 305: low priority: 
+      A file should contain no more than 15 functions;
+      this file contains 16 functions
+   
+      node.c: line 47: medium priority:
+      Do you want to validate 'pvNewContents' through an assert?
+   
+      node.c: line 93: medium priority:
+      Do you want to validate 'pvContents' through an assert?
 
+ft.c: 
+      ft.c: line 374: low priority: 
+      A loop should consist of fewer than 35 lines;
+      this loop consists of 39 lines; consider refactoring
+   
+      ft.c: line 650: low priority: 
+      A file should contain no more than 15 functions;
+      this file contains 17 functions
+   
+      ft.c: line 314: medium priority:
+      Do you want to validate 'pvContents' through an assert?
+   
+      ft.c: line 477: medium priority:
+      Do you want to validate 'pvNewContents' through an assert?
+   
+      ft.c: line 649: low priority: 
+      A source code file should contain fewer than 500 lines;
+      this file contains 650 lines
 
 ------------------------------------------------------------------------
 For each of the five faulty BDT implementations required by Step
