@@ -27,8 +27,8 @@ size_t Node_getLength(Node_T oNNode);
 and FALSE otherwise */
 boolean Node_childrenIsNull(Node_T oNNode);
 
-/* Replaces oNNode's contents with pvNewContents and  and returns the
-  old contents. */
+/* Replaces oNNode's contents with pvNewContents and content length with
+ulNewLenght, returning the old contents. */
 void *Node_editContents(Node_T oNNode, void *pvNewContents, 
   size_t ulNewLength);
 
